@@ -23,10 +23,10 @@ const CardFlippedWrapper = styled.div`
   justify-content: space-between;
   height: 100%;
 
-  .flipped_upper {
-    display: flex;
-    justify-content: space-between;
-  }
+  // .flipped_upper {
+  //   display: flex;
+  //   justify-content: space-between;
+  // }
 `;
 
 const CardMetaWrapper = styled.div`
@@ -46,6 +46,11 @@ const GroupIconWrapper = styled.div`
 const FlexHorizontal = styled.div`
   display: flex;
   align-items: center;
+`;
+
+const FlexVert = styled.div`
+  display: flex;
+  justify-content: space-between;
 `;
 
 const TrophyWrapper = styled.div`
@@ -99,8 +104,8 @@ const AppraiserNFTBadge: React.FC<{ src: string }> = ({ src }) => {
           className="ribbon"
           src="/SVGs/ribbon-small.svg"
           alt="small-ribbon-overlay"
-          width="8.5"
-          height="10.5"
+          width="15"
+          height="18"
         />
         <img
           src={src}
@@ -153,7 +158,7 @@ export const CardFlipped: React.FC<MockCardData> = (props) => {
   return (
     <CardWrapper>
       <CardFlippedWrapper>
-        <div className="flipped_upper">
+        <FlexVert>
           <ImageWrapper>
             <img
               className="ribbon"
@@ -193,7 +198,7 @@ export const CardFlipped: React.FC<MockCardData> = (props) => {
             <Black23SerifBold>Competition ends in:</Black23SerifBold>
             <CardCountdown />
           </CardMetaWrapper>
-        </div>
+        </FlexVert>
         <div>
           <div>
             <Black23SerifBold>Competition Details</Black23SerifBold>
