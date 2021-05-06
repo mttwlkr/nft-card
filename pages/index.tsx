@@ -4,6 +4,7 @@ import styles from "../styles/Home.module.css";
 import Image from "next/image";
 import styled from "styled-components";
 import { CardContainer } from "../components/CardContainer";
+import { UpshotWeb3Provider } from "../components/UpshotWeb3Provider";
 
 export interface MockCardData {
   title: string;
@@ -41,9 +42,11 @@ const AppContainer = styled.div`
 export default function Home() {
   return (
     <AppContainer>
-      {mockCardData.map((c) => (
-        <CardContainer key={c.title} nft={c} />
-      ))}
+      <UpshotWeb3Provider>
+        {mockCardData.map((c) => (
+          <CardContainer key={c.title} nft={c} />
+        ))}
+      </UpshotWeb3Provider>
     </AppContainer>
   );
 }

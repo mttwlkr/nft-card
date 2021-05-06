@@ -15,6 +15,8 @@ import {
   Grey16Sans,
 } from "./Text";
 import { useFetchEthPrice } from "./useFetchEthPrice";
+import { useWeb3Context } from "web3-react";
+import { ethers } from "ethers";
 
 const CardFlippedWrapper = styled.div`
   padding: 25px;
@@ -59,7 +61,7 @@ const TrophyWrapper = styled.div`
 const RewardInfoWrapper = styled.div`
   border: 1px solid black;
   border-radius: 20px;
-  padding: 25px;
+  padding: 15px;
 `;
 
 const ImageWrapper = styled.div`
@@ -136,6 +138,7 @@ export const CardFlipped: React.FC<MockCardData> = (props) => {
 
   const [showNFTBadges, setShowNFTBadges] = useState(true);
   const [appraiserPrefix, setAppraiserPrefix] = useState("1st");
+  const [ownerAddress, setOwnerAddress] = useState("0x");
 
   const { priceInUSD } = useFetchEthPrice("2500000000000000000");
   const copyVariable = "Place | top appraiser reward info:";
@@ -149,6 +152,25 @@ export const CardFlipped: React.FC<MockCardData> = (props) => {
       setAppraiserPrefix("1st");
     }
   }, [trophyState]);
+
+  const context = useWeb3Context();
+
+  useEffect(() => {
+    const getOwner = async () => {
+      const contract = new ethers.Contract(
+        "0x60f80121c31a0d46b5279700f9df786054aa5ee5",
+        [
+          "function balanceOf(address owner) view returns (uint256)",
+          "function ownerOf(uint256 tokenId)  view   returns (address)",
+        ],
+        context.library
+      );
+      const tokenId = 512384;
+      let ownerAddr = await contract.callStatic.ownerOf(tokenId);
+      setOwnerAddress(ownerAddr);
+    };
+    getOwner();
+  }, [context]);
 
   return (
     <CardWrapper>
@@ -195,6 +217,10 @@ export const CardFlipped: React.FC<MockCardData> = (props) => {
           </CardMetaWrapper>
         </FlexVert>
         <div>
+          <div style={{ margin: "10px 0" }}>
+            <Black23SerifBold>Currently Owned By: </Black23SerifBold>
+            <Grey14Sans>{ownerAddress}</Grey14Sans>
+          </div>
           <div>
             <Black23SerifBold>Competition Details</Black23SerifBold>
           </div>
