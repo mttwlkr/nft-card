@@ -13,7 +13,7 @@ const zeroPad = (num, places) => String(num).padStart(places, "0");
 
 function useCountdownTime() {
   const [timeLeft, setTimeLeft] = useState("00:00:00:00");
-  const endsAt = 1620302400 * 1000;
+  const endsAt = 1620388800 * 1000;
 
   let intervalId = setInterval(function () {
     const now = Date.now();
