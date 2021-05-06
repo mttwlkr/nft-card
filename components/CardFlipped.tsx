@@ -26,9 +26,6 @@ const CardFlippedWrapper = styled.div`
   .flipped_upper {
     display: flex;
     justify-content: space-between;
-    @media (max-width: 768px) {
-      flex-direction: column;
-    }
   }
 `;
 
