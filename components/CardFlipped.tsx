@@ -26,7 +26,6 @@ const CardFlippedWrapper = styled.div`
   .flipped_upper {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 20px;
     @media (max-width: 768px) {
       flex-direction: column;
     }
@@ -198,9 +197,8 @@ export const CardFlipped: React.FC<MockCardData> = (props) => {
             <CardCountdown />
           </CardMetaWrapper>
         </div>
-        <div style={{ textAlign: "center" }}></div>
         <div>
-          <div style={{ marginBottom: "10px" }}>
+          <div>
             <Black23SerifBold>Competition Details</Black23SerifBold>
           </div>
           <Grey14Sans>{competitionBody}</Grey14Sans>
@@ -221,10 +219,11 @@ export const CardFlipped: React.FC<MockCardData> = (props) => {
           ))}
         </TrophyWrapper>
         <RewardInfoWrapper>
-          <Black18SansBold>
-            {`${appraiserPrefix} ${copyVariable}`}
-          </Black18SansBold>
-          <br />
+          <div style={{ marginBottom: "4px" }}>
+            <Black18SansBold>
+              {`${appraiserPrefix} ${copyVariable}`}
+            </Black18SansBold>
+          </div>
           <Grey14Sans>
             The top apparaiser accross all three groups will recieve 2 limited
             edition NFTs from @nathanhead’s nevest collection. These rewards
