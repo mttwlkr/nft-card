@@ -79,6 +79,14 @@ const ImageWrapper = styled.div`
   }
 `;
 
+const NftRewardButton = styled.button`
+  float: right;
+  color: #d1568e;
+  border: none;
+  background: transparent;
+  textdecoration: underline;
+`;
+
 const GroupIcon: React.FC = () => {
   return (
     <GroupIconWrapper>
@@ -246,6 +254,14 @@ export const CardFlipped: React.FC<MockCardData> = (props) => {
             <Black18SansBold>
               {`${appraiserPrefix} ${copyVariable}`}
             </Black18SansBold>
+            <NftRewardButton
+              onClick={(e) => {
+                setShowNFTBadges(!showNFTBadges);
+                e.stopPropagation();
+              }}
+            >
+              {`${!showNFTBadges ? "Show " : "Hide "} Reward NFTs`}
+            </NftRewardButton>
           </div>
           <Grey14Sans>
             The top apparaiser accross all three groups will recieve 2 limited
