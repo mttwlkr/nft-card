@@ -75,6 +75,10 @@ const ImageWrapper = styled.div`
     right: 5px;
     top: 5px;
   }
+
+  img.badge {
+    border-radius: 10px;
+  }
 `;
 
 const GroupIcon: React.FC = () => {
@@ -91,6 +95,30 @@ const GroupIcon: React.FC = () => {
   );
 };
 
+const AppraiserNFTBadge: React.FC<{ src: string }> = ({ src }) => {
+  return (
+    <div style={{ marginRight: "20px" }}>
+      <ImageWrapper>
+        <img
+          className="ribbon"
+          src="/SVGs/ribbon-small.svg"
+          alt="small-ribbon-overlay"
+          width="8.5"
+          height="10.5"
+        />
+        <img
+          src={src}
+          className="badge"
+          alt="small-appraiser-badge"
+          height="80"
+          width="64"
+        />
+      </ImageWrapper>
+      <span>#14762</span>
+    </div>
+  );
+};
+
 enum Url {
   First = "/SVGs/first-trophy.svg",
   Second = "/SVGs/second-trophy.svg",
@@ -102,6 +130,7 @@ const trophyPossibilities = {
   [Url.Second]: [Url.First, Url.Second, Url.Third],
   [Url.Third]: [Url.Second, Url.Third, Url.First],
 };
+
 export const CardFlipped: React.FC<MockCardData> = (props) => {
   const { title, competitionBody, flippedImage } = props;
 
@@ -109,6 +138,7 @@ export const CardFlipped: React.FC<MockCardData> = (props) => {
     trophyPossibilities[Url.First]
   );
 
+  const [showNFTBadges, setShowNFTBadges] = useState(true);
   const [appraiserPrefix, setAppraiserPrefix] = useState("1st");
 
   const { priceInUSD } = useFetchEthPrice("2500000000000000000");
@@ -200,6 +230,13 @@ export const CardFlipped: React.FC<MockCardData> = (props) => {
             edition NFTs from @nathanhead’s nevest collection. These rewards
             will appear in your trophy case.
           </Grey14Sans>
+          {showNFTBadges && (
+            <div style={{ display: "flex", marginTop: "10px" }}>
+              <AppraiserNFTBadge src={flippedImage} />
+              <AppraiserNFTBadge src={flippedImage} />
+              <AppraiserNFTBadge src={flippedImage} />
+            </div>
+          )}
         </RewardInfoWrapper>
       </CardFlippedWrapper>
     </CardWrapper>
