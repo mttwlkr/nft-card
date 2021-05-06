@@ -66,6 +66,17 @@ const RewardInfoWrapper = styled.div`
   padding: 25px;
 `;
 
+const ImageWrapper = styled.div`
+  position: relative;
+
+  img.ribbon {
+    z-index: 5;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+  }
+`;
+
 const GroupIcon: React.FC = () => {
   return (
     <GroupIconWrapper>
@@ -117,7 +128,16 @@ export const CardFlipped: React.FC<MockCardData> = (props) => {
     <CardWrapper>
       <CardFlippedWrapper>
         <div className="flipped_upper">
-          <Image src={flippedImage} alt={title} height="325" width="260" />
+          <ImageWrapper>
+            <img
+              className="ribbon"
+              src="/SVGs/ribbon-main.svg"
+              alt="small-ribbon-overlay"
+              width="68"
+              height="84"
+            />
+            <img src={flippedImage} alt={title} height="325" width="260" />
+          </ImageWrapper>
           <CardMetaWrapper>
             <Black35SerifBold>{title}</Black35SerifBold>
             <FlexHorizontal>
