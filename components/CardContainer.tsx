@@ -16,6 +16,10 @@ export const CardWrapper = styled.div`
   background-color: white;
   border: 1px solid red;
   border-radius: 25px;
+
+  .cover-image {
+    border-radius: 25px;
+  }
 `;
 
 export const CardContainer: React.FC<{ nft: MockCardData }> = ({
@@ -35,10 +39,11 @@ export const CardContainer: React.FC<{ nft: MockCardData }> = ({
     >
       {uiState === CardState.Default && (
         <Image
+          className="cover-image"
           src={nft.coverImage}
           alt={nft.title}
-          width="443px"
-          height="550px"
+          width="557px"
+          height="794px"
         />
       )}
       {uiState === CardState.Flipped && <CardFlipped {...nft} />}
