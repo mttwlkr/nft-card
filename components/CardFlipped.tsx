@@ -22,11 +22,6 @@ const CardFlippedWrapper = styled.div`
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
-
-  // .flipped_upper {
-  //   display: flex;
-  //   justify-content: space-between;
-  // }
 `;
 
 const CardMetaWrapper = styled.div`
