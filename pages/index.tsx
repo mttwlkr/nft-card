@@ -27,12 +27,23 @@ const mockCardData: Array<MockCardData> = [
   },
 ];
 
+const AppContainer = styled.div`
+  background-color: grey;
+  min-height: 100vh;
+  padding: 0 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+`;
+
 export default function Home() {
   return (
-    <div className={styles.container}>
+    <AppContainer>
       {mockCardData.map((c) => (
         <CardContainer key={c.title} nft={c} />
       ))}
-    </div>
+    </AppContainer>
   );
 }

@@ -10,11 +10,16 @@ enum CardState {
   Flipped = "flipped",
 }
 
+// height: 794px;
+// width: 639px;
+const height = "760px"; // from figma
+const width = "560px"; // from figma
+
 export const CardWrapper = styled.div`
-  width: 558px; // from figma
-  height: 794px; // from figma
+  width: ${width};
+  height: ${height};
+
   background-color: white;
-  border: 1px solid red;
   border-radius: 25px;
 
   .cover-image {
@@ -42,8 +47,8 @@ export const CardContainer: React.FC<{ nft: MockCardData }> = ({
           className="cover-image"
           src={nft.coverImage}
           alt={nft.title}
-          width="557px"
-          height="794px"
+          width={width}
+          height={height}
         />
       )}
       {uiState === CardState.Flipped && <CardFlipped {...nft} />}

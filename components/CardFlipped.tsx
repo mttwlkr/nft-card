@@ -31,7 +31,7 @@ const CardFlippedWrapper = styled.div`
 `;
 
 const CardMetaWrapper = styled.div`
-  padding: 10px;
+  padding-right: 15px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -110,7 +110,7 @@ export const CardFlipped: React.FC<MockCardData> = (props) => {
     <CardWrapper>
       <CardFlippedWrapper>
         <div className="flipped_upper">
-          <Image src={flippedImage} alt={title} height="277" width="238" />
+          <Image src={flippedImage} alt={title} height="325" width="260" />
           <CardMetaWrapper>
             <Black35SerifBold>{title}</Black35SerifBold>
             <FlexHorizontal>
