@@ -98,10 +98,20 @@ export const CardFlipped: React.FC<MockCardData> = (props) => {
     trophyPossibilities[Url.First]
   );
 
+  const [appraiserPrefix, setAppraiserPrefix] = useState("1st");
+
   const { priceInUSD } = useFetchEthPrice("2500000000000000000");
-  const isFirstCard = trophyState === trophyPossibilities[Url.First];
-  const isSecondCard = trophyState === trophyPossibilities[Url.Second];
-  const isThirdCard = trophyState === trophyPossibilities[Url.Third];
+  const copyVariable = "Place | top appraiser reward info:";
+
+  useEffect(() => {
+    if (trophyState === trophyPossibilities[Url.Third]) {
+      setAppraiserPrefix("3rd");
+    } else if (trophyState === trophyPossibilities[Url.Second]) {
+      setAppraiserPrefix("2nd");
+    } else {
+      setAppraiserPrefix("1st");
+    }
+  }, [trophyState]);
 
   return (
     <CardWrapper>
@@ -160,9 +170,7 @@ export const CardFlipped: React.FC<MockCardData> = (props) => {
         </TrophyWrapper>
         <RewardInfoWrapper>
           <Black18SansBold>
-            {isFirstCard && "1st Place | top appraiser reward info:"}
-            {isSecondCard && "2nd Place | top appraiser reward info:"}
-            {isThirdCard && "3rd Place | top appraiser reward info:"}
+            {`${appraiserPrefix} ${copyVariable}`}
           </Black18SansBold>
           <br />
           <Grey14Sans>
