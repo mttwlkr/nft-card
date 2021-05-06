@@ -1,3 +1,8 @@
+## Screenshots
+
+![upshot-cover](https://user-images.githubusercontent.com/30199861/117306606-09778d00-ae3d-11eb-945a-998f8a56b5b1.png)
+![upshot-flipped](https://user-images.githubusercontent.com/30199861/117306648-14cab880-ae3d-11eb-921e-2bef19ef73c0.png)
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
