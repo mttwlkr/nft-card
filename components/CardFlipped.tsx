@@ -1,5 +1,5 @@
 import Head from "next/head";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import styled from "styled-components";
 import { MockCardData } from "../pages/index";
@@ -10,8 +10,11 @@ import {
   Black23SerifBold,
   Grey14Sans,
   Black18SansBold,
+  Grey12Sans,
+  Black35SerifBold,
+  Grey16Sans,
 } from "./Text";
-import { Grey12Sans, Black35SerifBold, Grey16Sans } from "./Text";
+import { useFetchEthPrice } from "./useFetchEthPrice";
 
 const CardFlippedWrapper = styled.div`
   padding: 25px;
@@ -46,12 +49,6 @@ const GroupIconWrapper = styled.div`
 
 const FlexHorizontal = styled.div`
   display: flex;
-  align-items: center;
-`;
-
-const FlexVertical = styled.div`
-  display: flex;
-  flex-direction: column;
   align-items: center;
 `;
 
@@ -94,7 +91,6 @@ const trophyPossibilities = {
   [Url.Second]: [Url.First, Url.Second, Url.Third],
   [Url.Third]: [Url.Second, Url.Third, Url.First],
 };
-
 export const CardFlipped: React.FC<MockCardData> = (props) => {
   const { title, competitionBody, flippedImage } = props;
 
@@ -102,6 +98,7 @@ export const CardFlipped: React.FC<MockCardData> = (props) => {
     trophyPossibilities[Url.First]
   );
 
+  const { priceInUSD } = useFetchEthPrice("2500000000000000000");
   const isFirstCard = trophyState === trophyPossibilities[Url.First];
   const isSecondCard = trophyState === trophyPossibilities[Url.Second];
   const isThirdCard = trophyState === trophyPossibilities[Url.Third];
@@ -138,6 +135,9 @@ export const CardFlipped: React.FC<MockCardData> = (props) => {
           </CardMetaWrapper>
         </div>
         <div>
+          <Black18SansBold>{`Current Price: $${priceInUSD} `}</Black18SansBold>
+        </div>
+        <div>
           <div style={{ marginBottom: "10px" }}>
             <Black23SerifBold>Competition Details</Black23SerifBold>
           </div>
@@ -164,7 +164,6 @@ export const CardFlipped: React.FC<MockCardData> = (props) => {
             {isSecondCard && "2nd Place | top appraiser reward info:"}
             {isThirdCard && "3rd Place | top appraiser reward info:"}
           </Black18SansBold>
-          <br />
           <br />
           <Grey14Sans>
             The top apparaiser accross all three groups will recieve 2 limited
