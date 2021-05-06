@@ -34,7 +34,7 @@ const CardFlippedWrapper = styled.div`
 `;
 
 const CardMetaWrapper = styled.div`
-  padding-right: 15px;
+  padding-right: 50px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

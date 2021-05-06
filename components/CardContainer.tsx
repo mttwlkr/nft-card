@@ -5,10 +5,8 @@ import Image from "next/image";
 import styled from "styled-components";
 import { CardFlipped } from "./CardFlipped";
 
-// height: 794px;
-// width: 639px;
-const height = "760px"; // from figma
-const width = "560px"; // from figma
+const height = "794px"; // from figma
+const width = "639px"; // from figma
 
 export const CardWrapper = styled.div`
   width: ${width};
