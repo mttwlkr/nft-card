@@ -133,6 +133,10 @@ export const CardFlipped: React.FC<MockCardData> = (props) => {
               <Black16SerifItalic>{` @${title}`}</Black16SerifItalic>
             </FlexHorizontal>
             <div>
+              <Grey16Sans>Current Price: </Grey16Sans>
+              <Black16SerifItalic>{` $${priceInUSD}`}</Black16SerifItalic>
+            </div>
+            <div>
               <Black23SerifBold>Eligible Groups</Black23SerifBold>
               <FlexHorizontal>
                 <GroupIcon />
@@ -144,9 +148,7 @@ export const CardFlipped: React.FC<MockCardData> = (props) => {
             <CardCountdown />
           </CardMetaWrapper>
         </div>
-        <div>
-          <Black18SansBold>{`Current Price: $${priceInUSD} `}</Black18SansBold>
-        </div>
+        <div style={{ textAlign: "center" }}></div>
         <div>
           <div style={{ marginBottom: "10px" }}>
             <Black23SerifBold>Competition Details</Black23SerifBold>
