@@ -5,11 +5,6 @@ import Image from "next/image";
 import styled from "styled-components";
 import { CardFlipped } from "./CardFlipped";
 
-enum CardState {
-  Default = "default",
-  Flipped = "flipped",
-}
-
 // height: 794px;
 // width: 639px;
 const height = "760px"; // from figma
@@ -27,22 +22,11 @@ export const CardWrapper = styled.div`
   }
 `;
 
-export const CardContainer: React.FC<{ nft: MockCardData }> = ({
-  nft,
-  children,
-}) => {
-  const [uiState, setUiState] = useState<CardState>(CardState.Default);
+export const CardContainer: React.FC<{ nft: MockCardData }> = ({ nft }) => {
+  const [isFlipped, setFlipped] = useState(false);
   return (
-    <CardWrapper
-      onClick={() => {
-        if (uiState === CardState.Default) {
-          setUiState(CardState.Flipped);
-        } else {
-          setUiState(CardState.Default);
-        }
-      }}
-    >
-      {uiState === CardState.Default && (
+    <CardWrapper onClick={() => setFlipped(!isFlipped)}>
+      {!isFlipped && (
         <Image
           className="cover-image"
           src={nft.coverImage}
@@ -51,7 +35,7 @@ export const CardContainer: React.FC<{ nft: MockCardData }> = ({
           height={height}
         />
       )}
-      {uiState === CardState.Flipped && <CardFlipped {...nft} />}
+      {isFlipped && <CardFlipped {...nft} />}
     </CardWrapper>
   );
 };
