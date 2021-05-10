@@ -18,8 +18,10 @@ import { useFetchEthPrice } from "./useFetchEthPrice";
 import { useWeb3Context } from "web3-react";
 import { ethers } from "ethers";
 
+const paddingStep = 15;
+
 const CardFlippedWrapper = styled.div`
-  padding: 25px;
+  padding: ${paddingStep}px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -27,7 +29,8 @@ const CardFlippedWrapper = styled.div`
 `;
 
 const CardMetaWrapper = styled.div`
-  padding-right: 50px;
+  width: 100%;
+  padding: 0 30px 0 40px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -183,60 +186,63 @@ export const CardFlipped: React.FC<MockCardData> = (props) => {
   return (
     <CardWrapper>
       <CardFlippedWrapper>
-        <FlexVert>
-          <ImageWrapper>
-            <img
-              className="ribbon"
-              src="/SVGs/ribbon-main.svg"
-              alt="small-ribbon-overlay"
-              width="68"
-              height="84"
-            />
-            <img src={flippedImage} alt={title} height="325" width="260" />
-          </ImageWrapper>
-          <CardMetaWrapper>
-            <Black35SerifBold>{title}</Black35SerifBold>
-            <FlexHorizontal>
-              <Grey16Sans>Created by: </Grey16Sans>
-              <div style={{ margin: "0 6px" }}>
-                <Image
-                  src="/SVGs/creator-icon.svg"
-                  height="16px"
-                  width="16px"
-                  alt="creator-icon"
-                />
-              </div>
-              <Black16SerifItalic>{` @${title}`}</Black16SerifItalic>
-            </FlexHorizontal>
-            <div>
-              <Grey16Sans>Current Price: </Grey16Sans>
-              <Black16SerifItalic>{` $${priceInUSD}`}</Black16SerifItalic>
-            </div>
-            <div>
-              <Black23SerifBold>Eligible Groups</Black23SerifBold>
+        <div style={{ padding: `${paddingStep}px` }}>
+          <FlexVert>
+            <ImageWrapper>
+              <img
+                className="ribbon"
+                src="/SVGs/ribbon-main.svg"
+                alt="small-ribbon-overlay"
+                width="68"
+                height="84"
+              />
+              <img src={flippedImage} alt={title} width="250" height="300" />
+            </ImageWrapper>
+            <CardMetaWrapper>
+              <Black35SerifBold>{title}</Black35SerifBold>
               <FlexHorizontal>
-                <GroupIcon />
-                <GroupIcon />
-                <GroupIcon />
+                <Grey16Sans>Created by: </Grey16Sans>
+                <div style={{ margin: "0 6px" }}>
+                  <Image
+                    src="/SVGs/creator-icon.svg"
+                    height="16px"
+                    width="16px"
+                    alt="creator-icon"
+                  />
+                </div>
+                <Black16SerifItalic>{` @${title}`}</Black16SerifItalic>
               </FlexHorizontal>
-            </div>
-            <Black23SerifBold>Competition ends in:</Black23SerifBold>
-            <CardCountdown />
-          </CardMetaWrapper>
-        </FlexVert>
-        <div>
-          <div style={{ margin: "10px 0" }}>
-            <Black23SerifBold>Currently Owned By: </Black23SerifBold>
-            <Grey14Sans>{ownerAddress}</Grey14Sans>
-          </div>
+              <div>
+                <Grey16Sans>Current Price: </Grey16Sans>
+                <Black16SerifItalic>{` $${priceInUSD}`}</Black16SerifItalic>
+              </div>
+              <div>
+                <Black23SerifBold>Eligible Groups</Black23SerifBold>
+                <FlexHorizontal>
+                  <GroupIcon />
+                  <GroupIcon />
+                  <GroupIcon />
+                </FlexHorizontal>
+              </div>
+              <Black23SerifBold>Competition ends in:</Black23SerifBold>
+              <CardCountdown />
+            </CardMetaWrapper>
+          </FlexVert>
           <div>
-            <Black23SerifBold>Competition Details</Black23SerifBold>
+            <div style={{ margin: "10px 0" }}>
+              <Black23SerifBold>Currently Owned By: </Black23SerifBold>
+              <Grey14Sans>{ownerAddress}</Grey14Sans>
+            </div>
+            <div>
+              <Black23SerifBold>Competition Details</Black23SerifBold>
+            </div>
+            <Grey14Sans>{competitionBody}</Grey14Sans>
           </div>
-          <Grey14Sans>{competitionBody}</Grey14Sans>
         </div>
         <TrophyWrapper>
           {trophyState.map((url, idx) => (
             <Image
+              key={idx}
               src={url}
               height={idx === 1 ? 68 : 55}
               width={idx === 1 ? 68 : 55}
