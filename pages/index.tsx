@@ -1,7 +1,4 @@
-import Head from "next/head";
-import React, { useState } from "react";
-import styles from "../styles/Home.module.css";
-import Image from "next/image";
+import React from "react";
 import styled from "styled-components";
 import { CardContainer } from "../components/CardContainer";
 import { UpshotWeb3Provider } from "../components/UpshotWeb3Provider";
@@ -31,7 +28,6 @@ const mockCardData: Array<MockCardData> = [
 const AppContainer = styled.div`
   background-color: grey;
   min-height: 100vh;
-  padding: 0 0.5rem;
   display: flex;
   flex-direction: column;
   justify-content: center;

@@ -18,74 +18,29 @@ import { useFetchEthPrice } from "./useFetchEthPrice";
 import { useWeb3Context } from "web3-react";
 import { ethers } from "ethers";
 
-const CardFlippedWrapper = styled.div`
-  padding: 25px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
-`;
+// ----------------------------
+// TYPES
+// ----------------------------
 
-const CardMetaWrapper = styled.div`
-  padding-right: 50px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-`;
+enum Url {
+  First = "/SVGs/first-trophy.svg",
+  Second = "/SVGs/second-trophy.svg",
+  Third = "/SVGs/third-trophy.svg",
+}
 
-const GroupIconWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 0 4px;
-`;
+// ----------------------------
+// CONSTANTS
+// ----------------------------
 
-const FlexHorizontal = styled.div`
-  display: flex;
-  align-items: center;
-`;
+const trophyPossibilities = {
+  [Url.First]: [Url.Second, Url.First, Url.Third],
+  [Url.Second]: [Url.First, Url.Second, Url.Third],
+  [Url.Third]: [Url.Second, Url.Third, Url.First],
+};
 
-const FlexVert = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
-
-const TrophyWrapper = styled.div`
-  text-align: center;
-
-  .trophy-icon {
-    padding: 0 30px;
-  }
-`;
-
-const RewardInfoWrapper = styled.div`
-  border: 1px solid black;
-  border-radius: 20px;
-  padding: 15px;
-`;
-
-const ImageWrapper = styled.div`
-  position: relative;
-
-  img.ribbon {
-    z-index: 5;
-    position: absolute;
-    right: 5px;
-    top: 5px;
-  }
-
-  img.badge {
-    border-radius: 10px;
-  }
-`;
-
-const NftRewardButton = styled.button`
-  float: right;
-  color: #d1568e;
-  border: none;
-  background: transparent;
-  textdecoration: underline;
-`;
+// ----------------------------
+// COMPONENTS
+// ----------------------------
 
 const GroupIcon: React.FC = () => {
   return (
@@ -112,6 +67,7 @@ const AppraiserNFTBadge: React.FC<{ src: string }> = ({ src }) => {
           width="15"
           height="18"
         />
+        <span className="rarity-value rarity-badge">00%</span>
         <img
           src={src}
           className="badge"
@@ -123,18 +79,6 @@ const AppraiserNFTBadge: React.FC<{ src: string }> = ({ src }) => {
       <span>#14762</span>
     </div>
   );
-};
-
-enum Url {
-  First = "/SVGs/first-trophy.svg",
-  Second = "/SVGs/second-trophy.svg",
-  Third = "/SVGs/third-trophy.svg",
-}
-
-const trophyPossibilities = {
-  [Url.First]: [Url.Second, Url.First, Url.Third],
-  [Url.Second]: [Url.First, Url.Second, Url.Third],
-  [Url.Third]: [Url.Second, Url.Third, Url.First],
 };
 
 export const CardFlipped: React.FC<MockCardData> = (props) => {
@@ -183,60 +127,65 @@ export const CardFlipped: React.FC<MockCardData> = (props) => {
   return (
     <CardWrapper>
       <CardFlippedWrapper>
-        <FlexVert>
-          <ImageWrapper>
-            <img
-              className="ribbon"
-              src="/SVGs/ribbon-main.svg"
-              alt="small-ribbon-overlay"
-              width="68"
-              height="84"
-            />
-            <img src={flippedImage} alt={title} height="325" width="260" />
-          </ImageWrapper>
-          <CardMetaWrapper>
-            <Black35SerifBold>{title}</Black35SerifBold>
-            <FlexHorizontal>
-              <Grey16Sans>Created by: </Grey16Sans>
-              <div style={{ margin: "0 6px" }}>
-                <Image
-                  src="/SVGs/creator-icon.svg"
-                  height="16px"
-                  width="16px"
-                  alt="creator-icon"
-                />
-              </div>
-              <Black16SerifItalic>{` @${title}`}</Black16SerifItalic>
-            </FlexHorizontal>
-            <div>
-              <Grey16Sans>Current Price: </Grey16Sans>
-              <Black16SerifItalic>{` $${priceInUSD}`}</Black16SerifItalic>
-            </div>
-            <div>
-              <Black23SerifBold>Eligible Groups</Black23SerifBold>
+        <div style={{ padding: `15px` }}>
+          <FlexVert>
+            <ImageWrapper>
+              <img
+                className="ribbon"
+                src="/SVGs/ribbon-main.svg"
+                alt="small-ribbon-overlay"
+                width="68"
+                height="84"
+              />
+              <span className="rarity-value">00%</span>
+              <span className="rarity-label">rarity</span>
+              <img src={flippedImage} alt={title} width="250" height="300" />
+            </ImageWrapper>
+            <CardMetaWrapper>
+              <Black35SerifBold>{title}</Black35SerifBold>
               <FlexHorizontal>
-                <GroupIcon />
-                <GroupIcon />
-                <GroupIcon />
+                <Grey16Sans>Created by: </Grey16Sans>
+                <div style={{ margin: "0 6px" }}>
+                  <Image
+                    src="/SVGs/creator-icon.svg"
+                    height="16px"
+                    width="16px"
+                    alt="creator-icon"
+                  />
+                </div>
+                <Black16SerifItalic>{` @${title}`}</Black16SerifItalic>
               </FlexHorizontal>
-            </div>
-            <Black23SerifBold>Competition ends in:</Black23SerifBold>
-            <CardCountdown />
-          </CardMetaWrapper>
-        </FlexVert>
-        <div>
-          <div style={{ margin: "10px 0" }}>
-            <Black23SerifBold>Currently Owned By: </Black23SerifBold>
-            <Grey14Sans>{ownerAddress}</Grey14Sans>
-          </div>
+              <div>
+                <Grey16Sans>Current Price: </Grey16Sans>
+                <Black16SerifItalic>{` $${priceInUSD}`}</Black16SerifItalic>
+              </div>
+              <div>
+                <Black23SerifBold>Eligible Groups</Black23SerifBold>
+                <FlexHorizontal>
+                  <GroupIcon />
+                  <GroupIcon />
+                  <GroupIcon />
+                </FlexHorizontal>
+              </div>
+              <Black23SerifBold>Competition ends in:</Black23SerifBold>
+              <CardCountdown />
+            </CardMetaWrapper>
+          </FlexVert>
           <div>
-            <Black23SerifBold>Competition Details</Black23SerifBold>
+            <div style={{ margin: "10px 0" }}>
+              <Black23SerifBold>Currently Owned By: </Black23SerifBold>
+              <Grey14Sans>{ownerAddress}</Grey14Sans>
+            </div>
+            <div>
+              <Black23SerifBold>Competition Details</Black23SerifBold>
+            </div>
+            <Grey14Sans>{competitionBody}</Grey14Sans>
           </div>
-          <Grey14Sans>{competitionBody}</Grey14Sans>
         </div>
         <TrophyWrapper>
           {trophyState.map((url, idx) => (
-            <Image
+            <img
+              key={idx}
               src={url}
               height={idx === 1 ? 68 : 55}
               width={idx === 1 ? 68 : 55}
@@ -280,3 +229,111 @@ export const CardFlipped: React.FC<MockCardData> = (props) => {
     </CardWrapper>
   );
 };
+
+// I'd break these out into my own file...
+
+// ----------------------------
+// STYLES
+// ----------------------------
+
+export const CardFlippedWrapper = styled.div`
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+`;
+
+export const CardMetaWrapper = styled.div`
+  width: 100%;
+  padding: 0 30px 0 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
+
+export const GroupIconWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 4px;
+`;
+
+export const FlexHorizontal = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+export const FlexVert = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+export const TrophyWrapper = styled.div`
+  text-align: center;
+
+  img.trophy-icon {
+    margin: 0 10px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+`;
+
+export const RewardInfoWrapper = styled.div`
+  border: 1px solid black;
+  border-radius: 20px;
+  padding: 15px;
+`;
+
+export const ImageWrapper = styled.div`
+  position: relative;
+
+  img.ribbon,
+  span.rarity-label,
+  span.rarity-value {
+    z-index: 5;
+    position: absolute;
+    color: white;
+  }
+
+  img.ribbon {
+    right: 5px;
+    top: 5px;
+  }
+
+  span.rarity-label {
+    right: 20px;
+    top: 40px;
+  }
+
+  span.rarity-value {
+    font-size: 24px;
+    right: 14px;
+    top: 16px;
+  }
+
+  span.rarity-badge {
+    font-size: 5px;
+    right: 6px;
+    top: 9px;
+    color: red;
+  }
+
+  img.badge {
+    border-radius: 10px;
+  }
+`;
+
+export const NftRewardButton = styled.button`
+  float: right;
+  color: #d1568e;
+  border: none;
+  background: transparent;
+  textdecoration: underline;
+
+  &:hover {
+    cursor: pointer;
+  }
+`;
