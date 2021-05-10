@@ -315,9 +315,9 @@ export const ImageWrapper = styled.div`
   }
 
   span.rarity-badge {
-    font-size: 10px;
-    right: 14px;
-    top: 16px;
+    font-size: 5px;
+    right: 6px;
+    top: 9px;
     color: red;
   }
 
