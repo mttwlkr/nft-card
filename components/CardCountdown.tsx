@@ -7,6 +7,7 @@ const CountdownWrapper = styled.div`
   border-radius: 4px;
   padding: 6px;
   text-align: center;
+  box-shadow: 0px 1px 5px grey;
 `;
 
 const zeroPad = (num, places) => String(num).padStart(places, "0");
