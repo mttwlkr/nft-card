@@ -74,11 +74,35 @@ const RewardInfoWrapper = styled.div`
 const ImageWrapper = styled.div`
   position: relative;
 
-  img.ribbon {
+  img.ribbon,
+  span.rarity-label,
+  span.rarity-value {
     z-index: 5;
     position: absolute;
+    color: white;
+  }
+
+  img.ribbon {
     right: 5px;
     top: 5px;
+  }
+
+  span.rarity-label {
+    right: 20px;
+    top: 40px;
+  }
+
+  span.rarity-value {
+    font-size: 24px;
+    right: 14px;
+    top: 16px;
+  }
+
+  span.rarity-badge {
+    font-size: 10px;
+    right: 14px;
+    top: 16px;
+    color: red;
   }
 
   img.badge {
@@ -123,6 +147,7 @@ const AppraiserNFTBadge: React.FC<{ src: string }> = ({ src }) => {
           width="15"
           height="18"
         />
+        <span className="rarity-value rarity-badge">00%</span>
         <img
           src={src}
           className="badge"
@@ -204,6 +229,8 @@ export const CardFlipped: React.FC<MockCardData> = (props) => {
                 width="68"
                 height="84"
               />
+              <span className="rarity-value">00%</span>
+              <span className="rarity-label">rarity</span>
               <img src={flippedImage} alt={title} width="250" height="300" />
             </ImageWrapper>
             <CardMetaWrapper>
