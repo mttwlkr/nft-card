@@ -25,12 +25,11 @@ export const CardContainer: React.FC<{ nft: MockCardData }> = ({ nft }) => {
   return (
     <CardWrapper onClick={() => setFlipped(!isFlipped)}>
       {!isFlipped && (
-        <Image
+        <img
           className="cover-image"
           src={nft.coverImage}
           alt={nft.title}
           width={width}
-          height={height}
         />
       )}
       {isFlipped && <CardFlipped {...nft} />}
