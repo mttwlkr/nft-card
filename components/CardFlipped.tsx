@@ -18,109 +18,29 @@ import { useFetchEthPrice } from "./useFetchEthPrice";
 import { useWeb3Context } from "web3-react";
 import { ethers } from "ethers";
 
-const paddingStep = 15;
+// ----------------------------
+// TYPES
+// ----------------------------
 
-const CardFlippedWrapper = styled.div`
-  padding: ${paddingStep}px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
-`;
+enum Url {
+  First = "/SVGs/first-trophy.svg",
+  Second = "/SVGs/second-trophy.svg",
+  Third = "/SVGs/third-trophy.svg",
+}
 
-const CardMetaWrapper = styled.div`
-  width: 100%;
-  padding: 0 30px 0 40px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-`;
+// ----------------------------
+// CONSTANTS
+// ----------------------------
 
-const GroupIconWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 0 4px;
-`;
+const trophyPossibilities = {
+  [Url.First]: [Url.Second, Url.First, Url.Third],
+  [Url.Second]: [Url.First, Url.Second, Url.Third],
+  [Url.Third]: [Url.Second, Url.Third, Url.First],
+};
 
-const FlexHorizontal = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const FlexVert = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
-
-const TrophyWrapper = styled.div`
-  text-align: center;
-
-  img.trophy-icon {
-    margin: 0 10px;
-
-    &:hover {
-      cursor: pointer;
-    }
-  }
-`;
-
-const RewardInfoWrapper = styled.div`
-  border: 1px solid black;
-  border-radius: 20px;
-  padding: 15px;
-`;
-
-const ImageWrapper = styled.div`
-  position: relative;
-
-  img.ribbon,
-  span.rarity-label,
-  span.rarity-value {
-    z-index: 5;
-    position: absolute;
-    color: white;
-  }
-
-  img.ribbon {
-    right: 5px;
-    top: 5px;
-  }
-
-  span.rarity-label {
-    right: 20px;
-    top: 40px;
-  }
-
-  span.rarity-value {
-    font-size: 24px;
-    right: 14px;
-    top: 16px;
-  }
-
-  span.rarity-badge {
-    font-size: 10px;
-    right: 14px;
-    top: 16px;
-    color: red;
-  }
-
-  img.badge {
-    border-radius: 10px;
-  }
-`;
-
-const NftRewardButton = styled.button`
-  float: right;
-  color: #d1568e;
-  border: none;
-  background: transparent;
-  textdecoration: underline;
-
-  &:hover {
-    cursor: pointer;
-  }
-`;
+// ----------------------------
+// COMPONENTS
+// ----------------------------
 
 const GroupIcon: React.FC = () => {
   return (
@@ -159,18 +79,6 @@ const AppraiserNFTBadge: React.FC<{ src: string }> = ({ src }) => {
       <span>#14762</span>
     </div>
   );
-};
-
-enum Url {
-  First = "/SVGs/first-trophy.svg",
-  Second = "/SVGs/second-trophy.svg",
-  Third = "/SVGs/third-trophy.svg",
-}
-
-const trophyPossibilities = {
-  [Url.First]: [Url.Second, Url.First, Url.Third],
-  [Url.Second]: [Url.First, Url.Second, Url.Third],
-  [Url.Third]: [Url.Second, Url.Third, Url.First],
 };
 
 export const CardFlipped: React.FC<MockCardData> = (props) => {
@@ -219,7 +127,7 @@ export const CardFlipped: React.FC<MockCardData> = (props) => {
   return (
     <CardWrapper>
       <CardFlippedWrapper>
-        <div style={{ padding: `${paddingStep}px` }}>
+        <div style={{ padding: `15px` }}>
           <FlexVert>
             <ImageWrapper>
               <img
@@ -321,3 +229,111 @@ export const CardFlipped: React.FC<MockCardData> = (props) => {
     </CardWrapper>
   );
 };
+
+// I'd break these out into my own file...
+
+// ----------------------------
+// STYLES
+// ----------------------------
+
+export const CardFlippedWrapper = styled.div`
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+`;
+
+export const CardMetaWrapper = styled.div`
+  width: 100%;
+  padding: 0 30px 0 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
+
+export const GroupIconWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 4px;
+`;
+
+export const FlexHorizontal = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+export const FlexVert = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+export const TrophyWrapper = styled.div`
+  text-align: center;
+
+  img.trophy-icon {
+    margin: 0 10px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+`;
+
+export const RewardInfoWrapper = styled.div`
+  border: 1px solid black;
+  border-radius: 20px;
+  padding: 15px;
+`;
+
+export const ImageWrapper = styled.div`
+  position: relative;
+
+  img.ribbon,
+  span.rarity-label,
+  span.rarity-value {
+    z-index: 5;
+    position: absolute;
+    color: white;
+  }
+
+  img.ribbon {
+    right: 5px;
+    top: 5px;
+  }
+
+  span.rarity-label {
+    right: 20px;
+    top: 40px;
+  }
+
+  span.rarity-value {
+    font-size: 24px;
+    right: 14px;
+    top: 16px;
+  }
+
+  span.rarity-badge {
+    font-size: 10px;
+    right: 14px;
+    top: 16px;
+    color: red;
+  }
+
+  img.badge {
+    border-radius: 10px;
+  }
+`;
+
+export const NftRewardButton = styled.button`
+  float: right;
+  color: #d1568e;
+  border: none;
+  background: transparent;
+  textdecoration: underline;
+
+  &:hover {
+    cursor: pointer;
+  }
+`;
