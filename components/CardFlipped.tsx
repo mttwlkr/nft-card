@@ -56,8 +56,12 @@ const FlexVert = styled.div`
 const TrophyWrapper = styled.div`
   text-align: center;
 
-  .trophy-icon {
-    padding: 0 30px;
+  img.trophy-icon {
+    margin: 0 10px;
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 `;
 
@@ -88,6 +92,10 @@ const NftRewardButton = styled.button`
   border: none;
   background: transparent;
   textdecoration: underline;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const GroupIcon: React.FC = () => {
@@ -241,7 +249,7 @@ export const CardFlipped: React.FC<MockCardData> = (props) => {
         </div>
         <TrophyWrapper>
           {trophyState.map((url, idx) => (
-            <Image
+            <img
               key={idx}
               src={url}
               height={idx === 1 ? 68 : 55}
