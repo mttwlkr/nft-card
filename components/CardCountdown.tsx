@@ -13,12 +13,17 @@ const CountdownWrapper = styled.div`
 const zeroPad = (num, places) => String(num).padStart(places, "0");
 
 function useCountdownTime() {
-  const [timeLeft, setTimeLeft] = useState("00:00:00:00");
-  const endsAt = 1620388800 * 1000;
+  const noTimeLeft = "00:00:00:00";
+  const [timeLeft, setTimeLeft] = useState(noTimeLeft);
+  const endsAt = 1620734400 * 1000;
 
   let intervalId = setInterval(function () {
     const now = Date.now();
     const diff = endsAt - now;
+
+    if (diff < 0) {
+      return noTimeLeft;
+    }
 
     const days = Math.floor(diff / (1000 * 60 * 60 * 24));
     const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
